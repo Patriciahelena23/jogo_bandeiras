@@ -1,0 +1,378 @@
+algoritmo JOGO_DAS_BANDEIRAS;
+// Síntese
+//  Objetivo: jogo de adivinhar pais pela bandeira 
+//  Entrada : letras 
+//  Saída   : resumo da palavra, se acertar todas as letras ganha e se acabar todos os tickets perde 
+
+
+principal
+	// MENU
+	caracter SouN;
+	inteiro nivel;
+
+	
+	//JAPAO 
+	texto japao[5];
+	texto tentativaJapao[5];
+	inteiro tentativaJapaoContador;
+	texto letraJapao;
+	inteiro iJapao;
+	texto mostraResultadoJapao;
+	logico acertouJapao;
+	logico errou;
+
+	//CUBA
+	texto cuba[4];
+	texto tentativaCuba[4];
+	inteiro tentativaCubaContador;
+	texto letraCuba;
+	inteiro iCuba;
+	texto mostraResultadoCuba;
+	logico acertouCuba;
+
+	//MALASIA
+	texto malasia[7];
+	texto tentativaMalasia[7];
+	inteiro tentativaMalasiaContador;
+	texto letraMalasia;
+	inteiro iMalasia;
+	texto mostraResultadoMalasia;
+	logico acertouMalasia;
+	
+	
+	//JAPAO
+	tentativaJapaoContador = 3;
+	mostraResultadoJapao = "";
+	japao[0] = "j";
+	japao[1] = "a";
+	japao[2] = "p";
+	japao[3] = "a";
+	japao[4] = "o";
+	tentativaJapao[0] = "*";
+	tentativaJapao[1] = "*";
+	tentativaJapao[2] = "*";
+	tentativaJapao[3] = "*";
+	tentativaJapao[4] = "*";
+
+	//CUBA
+	tentativaCubaContador = 3;
+	mostraResultadoCuba = "";
+	cuba[0] = "c";
+	cuba[1] = "u";
+	cuba[2] = "b";
+	cuba[3] = "a";
+	tentativaCuba[0] = "*";
+	tentativaCuba[1] = "*";
+	tentativaCuba[2] = "*";
+	tentativaCuba[3] = "*";
+
+	//MALASIA
+	tentativaMalasiaContador = 3;
+	mostraResultadoMalasia = "";
+	malasia[0] = "m";
+	malasia[1] = "a";
+	malasia[2] = "l";
+	malasia[3] = "a";
+	malasia[4] = "s";
+	malasia[5] = "i";
+	malasia[6] = "a";
+	tentativaMalasia[0] = "*";
+	tentativaMalasia[1] = "*";
+	tentativaMalasia[2] = "*";
+	tentativaMalasia[3] = "*";
+	tentativaMalasia[4] = "*";
+	tentativaMalasia[5] = "*";
+	tentativaMalasia[6] = "*";
+	
+	
+	// JNTRUCOES MENU
+	escreval(" ");
+	escreval("🏴OLA SEJA BEM-VINDO(A) AO JOGO DE ADIVINHAÇÃO DE BANDEIRAS!! DESEJA JOGAR?🏴");
+	escreval("▶ DIGITE S PARA SIM OU N PARA NAO ◀ ");
+	leiaCaracter(SouN);
+	 SouN = maiusculoCaracter(SouN);
+	
+	//QUER JOGAR
+	se ( SouN == 'S') entao
+		escreval( " OBAA!☻ ENTÃO VAMOS AS INSTRUÇÕES!");
+		escreval(" "); 
+		escreval( " O DESAFIO É ACERTAR O PAIS DA BANDEIRA MOSTRADA DIGITANDO -- LETRA POR LETRA --! BOA SORTE!☻ ");
+		escreval(" "); 
+		escreval (" VOCE TERA 3 TICKETS PARA ERROS! CUIDADO! ");
+		escreval(" ");
+		escreval (" SÃO 3 NIVEIS DIFERENTES! SENDO O 1 MAIS FACIL E O 3 O MAIS DIFICIL!");
+		escreval(" ");
+		escreval (" QUAL NIVEL DESEJA JOGAR❓ ");
+		leia (nivel);
+		
+		//INSTRUCOES JAPAO
+		se (nivel == 1) entao 
+			escreval("  _________    "); 
+			escreval(" |   ,-.   | "); 
+			escreval(" |  (   )  |  "); 
+			escreval(" |___`-'___| ");
+			escreval(" "); 
+			escreval("A QUAL PAIS PERTENCE ESSA BANDEIRA❓ "); 
+	
+			enquanto(tentativaJapaoContador != 0) faca
+	
+			acertouJapao = falso;
+	
+				escreval("DIGITE UMA LETRA ▼ ");
+				leia(letraJapao);
+	
+			para(iJapao de 0 ate 4 passo 1) faca
+
+				se(comparaTexto(maiusculo(letraJapao),maiusculo(japao[iJapao]))  == 0 ) entao
+					tentativaJapao[iJapao] = letraJapao;
+					acertouJapao = verdadeiro;
+				fimSe
+			fimPara
+	
+			se(acertouJapao) entao
+				escreval("BOAA! VOCE ACERTOU UMA LETRA!✔");
+				senao 
+					escreval("NAOO! VOCE NÃO ACERTOU NENHUMA LETRA! ✘ ");
+					tentativaJapaoContador = tentativaJapaoContador  - 1;
+					escreval("VOCÊ TEM "+ tentativaJapaoContador + " TICKETS RESTANTES!");
+				fimSe
+			
+					escreval(" ");
+					escreval("▼ PALAVRA ATUAL ▼  ");
+					escreval(" ");
+			
+			para(iJapao de 0 ate 4 passo 1) faca
+
+				escreval(tentativaJapao[iJapao]);
+	
+			fimPara
+			
+			se(compara_sequencias(japao,5,tentativaJapao) == 1) entao
+				escreval("IHULL!! VOCE GANHOU! MUITO BEM! ★ ☻ ★  ");
+				escreval("VOCÊ ACERTOU TODAS AS LETRAS E DESCOBRIU QUE A BANDEIRA É DO ★ JAPÃO ★ ! ");
+				interrompa;
+			fimSe
+	
+			fimEnquanto
+		
+			//SE PERDEU JAPAO
+			para(iJapao de 0 ate 4 passo 1) faca	
+				errou = falso;
+				se(comparaTexto(tentativaJapao[iJapao] ,"*" )  == 0 ) entao
+					errou = verdadeiro;
+				fimSe
+			fimPara
+		
+			se(errou) entao
+				escreval("    ACABARAM TODOS OS SEUS TICKETS! MAIS SORTE NA PROXIMA VEZ! ☹ ");
+				escreval(" ");
+				escreval("                    ☠☠☠ FIM DE JOGO ☠☠☠                   ");
+				escreval(" ");
+				escreval("              A BANDEIRA PERTENCE AO ★ JAPÃO ★! ");
+			fimSe
+
+		senao
+		fimSe
+		
+
+		//INSTRUCOES CUBA 
+
+		se (nivel == 2) entao 
+			escreval("  ________    "); 
+			escreval(" |`.======| "); 
+			escreval(" |* >=====|  "); 
+			escreval(" |.'======| ");
+			escreval(" "); 
+			escreval("A QUAL PAIS PERTENCE ESSA BANDEIRA❓ "); 
+
+			enquanto (tentativaCubaContador != 0) faca
+			
+			acertouCuba = falso;
+			
+				escreval("DIGITE UMA LETRA ▼ ");
+				leia(letraCuba);
+
+			para ( iCuba de 0 ate 3 passo 1) faca 
+
+				se(comparaTexto(maiusculo(letraCuba), maiusculo (cuba[iCuba])) == 0) entao
+					tentativaCuba[iCuba] = letraCuba;
+					acertouCuba = verdadeiro;
+				fimSe
+			fimPara
+
+			se(acertouCuba) entao
+
+				escreval("BOAA! VOCE ACERTOU UMA LETRA!✔");
+				senao 
+					escreval("NAOO! VOCE NÃO ACERTOU NENHUMA LETRA! ✘ ");
+					tentativaCubaContador = tentativaCubaContador  - 1;
+					escreval("VOCÊ TEM "+ tentativaCubaContador + " TICKETS RESTANTES!");
+				fimSe
+					escreval(" ");
+					escreval("▼ PALAVRA ATUAL ▼  ");
+					escreval(" ");
+				
+				para (iCuba de 0 ate 3 passo 1) faca
+					
+					escreval (tentativaCuba[iCuba]);
+				
+				fimPara
+
+				se (compara_sequencias(cuba,4,tentativaCuba) == 1) entao 
+					escreval("IHULL!! VOCE GANHOU! MUITO BEM! ★ ☻ ★  ");
+					escreval("VOCÊ ACERTOU TODAS AS LETRAS E DESCOBRIU QUE A BANDEIRA É DO ★ CUBA ★ ! ");
+					interrompa;
+				fimSe
+
+			fimEnquanto
+		
+		
+			//SE PERDEU CUBA
+			para(iCuba de 0 ate 3 passo 1) faca	
+				errou = falso;
+				se(comparaTexto(tentativaCuba[iCuba] ,"*" )  == 0 ) entao
+					errou = verdadeiro;
+				fimSe
+			fimPara
+		
+			se(errou) entao
+				escreval("    ACABARAM TODOS OS SEUS TICKETS! MAIS SORTE NA PROXIMA VEZ! ☹ ");
+				escreval(" ");
+				escreval("                    ☠☠☠ FIM DE JOGO ☠☠☠                   ");
+				escreval(" ");
+				escreval("                A BANDEIRA PERTENCE A ★ CUBA ★!");
+			
+			fimSe
+	
+		senao
+		fimSe
+
+			//INSTRUCOES MALASIA 
+
+		se (nivel == 3) entao 
+			escreval("  _________    "); 
+			escreval(" |(_*|=====| "); 
+			escreval(" |=========|  "); 
+			escreval(" |=========| ");
+			escreval(" "); 
+			escreval("A QUAL PAIS PERTENCE ESSA BANDEIRA❓ "); 
+
+			enquanto (tentativaMalasiaContador != 0) faca
+			
+			acertouMalasia = falso;
+			
+				escreval("DIGITE UMA LETRA ▼ ");
+				leia(letraMalasia);
+
+			para ( iMalasia de 0 ate 6 passo 1) faca 
+
+				se(comparaTexto(maiusculo(letraMalasia), maiusculo (malasia[iMalasia])) == 0) entao
+					tentativaMalasia[iMalasia] = letraMalasia;
+					acertouMalasia = verdadeiro;
+				fimSe
+			fimPara
+
+			se(acertouMalasia) entao
+
+				escreval("BOAA! VOCE ACERTOU UMA LETRA!✔");
+				senao 
+					escreval("NAOO! VOCE NÃO ACERTOU NENHUMA LETRA! ✘ ");
+					tentativaMalasiaContador = tentativaMalasiaContador  - 1;
+					escreval("VOCÊ TEM "+ tentativaMalasiaContador + " TICKETS RESTANTES!");
+				fimSe
+					escreval(" ");
+					escreval("▼ PALAVRA ATUAL ▼  ");
+					escreval(" ");
+				
+				para (iMalasia de 0 ate 6 passo 1) faca
+					
+					escreval (tentativaMalasia[iMalasia]);
+				
+				fimPara
+
+				se (compara_sequencias(malasia,7,tentativaMalasia) == 1) entao 
+					escreval("IHULL!! VOCE GANHOU! MUITO BEM! ★ ☻ ★  ");
+					escreval("VOCÊ ACERTOU TODAS AS LETRAS E DESCOBRIU QUE A BANDEIRA É DO ★ MALÁSIA ★ ! ");
+					interrompa;
+				fimSe
+
+			fimEnquanto
+		
+		
+			//SE PERDEU MALASIA
+			para(iMalasia de 0 ate 6 passo 1) faca	
+				errou = falso;
+				se(comparaTexto(tentativaMalasia[iMalasia] ,"*" )  == 0 ) entao
+					errou = verdadeiro;
+				fimSe
+			fimPara
+		
+			se(errou) entao
+				escreval("    ACABARAM TODOS OS SEUS TICKETS! MAIS SORTE NA PROXIMA VEZ! ☹ ");
+				escreval(" ");
+				escreval("                    ☠☠☠ FIM DE JOGO ☠☠☠                   ");
+				escreval(" ");
+				escreval("              A BANDEIRA PERTENCE A ★ MALASIA ★! ");
+			
+			fimSe
+	
+		fimSe
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+		
+
+
+	
+		
+	
+	
+	
+	
+	fimSe
+	//NAO QUER JOGAR 
+		se (SouN == 'N') entao
+			escreval( " AA QUE PENA! ☹ ATE A PROXIMA!");
+		fimSe
+
+	
+	
+fimPrincipal
+
+//Funcao para comparar sequencias
+funcao inteiro compara_sequencias(texto primeiro[],inteiro y, texto segundo[])
+	inteiro quantidade, n, aaa;
+	quantidade = y - 1;
+	enquanto(quantidade>=0)faca
+		n = comparaTexto(maiusculo(primeiro[quantidade]),maiusculo(segundo[quantidade]));
+		se(n != 0)entao
+			quantidade = 0;
+			aaa = 0;
+		senao
+			aaa = 1;
+		fimSe
+		quantidade = quantidade-1;
+	fimEnquanto
+	
+	retorna aaa;
+fimFuncao
+      
